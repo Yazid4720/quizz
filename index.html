@@ -33,7 +33,19 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
+        body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.dark-mode .quiz-card,
+.dark-mode .modal-content,
+.dark-mode .sidebar,
+.dark-mode .main-content {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border-color: #333;
+}
         body {
             background-color: #f5f7fa;
             color: var(--dark);
@@ -2329,6 +2341,58 @@
             forgotPassword.addEventListener('click', resetPassword);
             logoutBtn.addEventListener('click', logoutUser);
             
+            const darkModeToggle = document.createElement('button');
+darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+darkModeToggle.className = 'dark-mode-toggle';
+document.querySelector('header').appendChild(darkModeToggle);
+
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+});
+
+// Check for saved preference
+if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark-mode');
+}
+function saveQuestionToBank(question) {
+  if (!currentUser) return;
+  
+  db.ref(`users/${currentUser.uid}/questionBank`).push(question)
+    .then(() => {
+      alert('Question saved to your bank!');
+    });
+}
+
+// Add a "Save to Bank" button to each question in creator
+function addQuestionBankButton(questionDiv, questionObj) {
+  const bankBtn = document.createElement('button');
+  bankBtn.className = 'bank-btn';
+  bankBtn.innerHTML = '<i class="fas fa-save"></i> Save to Bank';
+  bankBtn.addEventListener('click', () => saveQuestionToBank(questionObj));
+  questionDiv.querySelector('.question-item-header').appendChild(bankBtn);
+}
+function generateResultImage() {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Draw your result card on canvas
+  // Then convert to image and share
+  canvas.toBlob(blob => {
+    const file = new File([blob], 'quiz-result.png', {type: 'image/png'});
+    
+    if (navigator.share) {
+      navigator.share({
+        files: [file],
+        title: 'My Quiz Result',
+        text: `I scored ${quizResults.score}/${quizResults.total} on ${currentQuiz.title}!`
+      });
+    }
+  });
+}
+
+// Add to share button
+shareBtn.addEventListener('click', generateResultImage);
             // Navigation
             createQuizBtn.addEventListener('click', showQuizCreator);
             exploreBtn.addEventListener('click', showHomePage);
