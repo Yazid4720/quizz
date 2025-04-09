@@ -6,9 +6,10 @@
     <title>ZoQuiz - Create and Take Quizzes</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    
     <style>
         :root {
             --primary: #4361ee;
@@ -1584,7 +1585,7 @@
                 </div>
             </div>
         </header>
-
+        
         <main>
             <!-- Home Page Content -->
             <section id="homePage">
@@ -2151,8 +2152,13 @@
         </div>
     </div>
 
-    <script>
- const firebaseConfig = {
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+signOut(auth).then(() => alert("Logged out"));
+
+   const firebaseConfig = {
             apiKey: "AIzaSyB0Aj452H6Gp1ociH4ufHrLiU6Uucb-ysM",
             authDomain: "who-is-the-spy-51308.firebaseapp.com",
             databaseURL: "https://who-is-the-spy-51308-default-rtdb.europe-west1.firebasedatabase.app",
