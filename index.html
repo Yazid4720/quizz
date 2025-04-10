@@ -6,9 +6,9 @@
     <title>ZoQuiz - Create and Take Quizzes</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     
     <style>
         :root {
@@ -34,19 +34,21 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+        
         body.dark-mode {
-  background-color: #121212;
-  color: #f5f5f5;
-}
+            background-color: #121212;
+            color: #f5f5f5;
+        }
 
-.dark-mode .quiz-card,
-.dark-mode .modal-content,
-.dark-mode .sidebar,
-.dark-mode .main-content {
-  background-color: #1e1e1e;
-  color: #f5f5f5;
-  border-color: #333;
-}
+        .dark-mode .quiz-card,
+        .dark-mode .modal-content,
+        .dark-mode .sidebar,
+        .dark-mode .main-content {
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+            border-color: #333;
+        }
+        
         body {
             background-color: #f5f7fa;
             color: var(--dark);
@@ -912,7 +914,7 @@
         .publish-btn i {
             margin-right: 10px;
         }
-        
+
         .publish-btn:hover {
             background: var(--accent-dark);
         }
@@ -1088,7 +1090,21 @@
             margin-bottom: 30px;
             text-align: left;
         }
-        
+        .stars {
+    color: var(--warning);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.stars i {
+    margin-right: 5px;
+    transition: all 0.2s;
+}
+
+.stars i:hover {
+    transform: scale(1.2);
+}
+
         .detail-card {
             background: #f8f9fa;
             padding: 15px;
@@ -1440,7 +1456,330 @@
             .dashboard {
                 grid-template-columns: 1fr;
             }
-            
+            /* Add to your existing CSS */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.game-controls {
+    background: var(--primary);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.quiz-code {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+}
+
+.control-btn i {
+    font-size: 0.9rem;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.participants-section {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow);
+}
+
+.participant-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.participant-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.participant-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.participant-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.question-section {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.current-question {
+    background: #f0f4f8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.power-ups {
+    background: #f0f4f8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.powerup-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.powerup-card {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    box-shadow: var(--shadow);
+}
+
+.powerup-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.powerup-card i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.powerup-card.active {
+    border-color: var(--accent);
+    background: rgba(247, 37, 133, 0.1);
+}
+
+.stats-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stats-card, .leaderboard-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.leaderboard-position {
+    font-weight: bold;
+    width: 30px;
+}
+
+.leaderboard-user {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.leaderboard-score {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.mode-option {
+    padding: 8px 15px;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: var(--shadow);
+}
+
+.mode-option.active {
+    background: var(--primary);
+    color: white;
+}
+
+.mode-option i {
+    font-size: 0.9rem;
+}
+
+/* Enhanced question answering CSS */
+.option-label {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 2px solid transparent;
+}
+
+.option-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: rgba(67, 97, 238, 0.3);
+}
+
+.option-input {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+}
+
+.option-label.correct {
+    background: rgba(76, 201, 240, 0.1);
+    border-color: var(--success);
+}
+
+.option-label.incorrect {
+    background: rgba(239, 35, 60, 0.1);
+    border-color: var(--danger);
+}
+
+.option-label.selected {
+    background: rgba(67, 97, 238, 0.1);
+    border-color: var(--primary);
+}
+
+.question-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.timer-container {
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+/* Strike mode indicator */
+.strike-indicator {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--danger);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Shield mode indicator */
+.shield-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--success);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
             .sidebar {
                 position: static;
                 max-height: none;
@@ -1536,6 +1875,175 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            background: transparent;
+            border: none;
+            color: var(--dark);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .dark-mode .dark-mode-toggle {
+            color: #f5f5f5;
+        }
+
+        /* Form control styles */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        .search-bar {
+    display: flex;
+    margin: 0 20px;
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.search-bar input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px 0 0 20px;
+    width: 100%;
+}
+
+.search-bar button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    padding: 0 15px;
+    cursor: pointer;
+}
+/* Add to your CSS */
+#participantView {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.quiz-status {
+    background: #f0f4f8;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.question-number {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.powerup-indicators {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.strike-indicator {
+    background: var(--danger);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.shield-indicator {
+    background: var(--success);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.leaderboard-container {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: var(--shadow);
+}
+
+#participantLeaderboardList {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.leaderboard-position {
+    font-weight: bold;
+    width: 30px;
+}
+
+.leaderboard-name {
+    flex-grow: 1;
+}
+
+.leaderboard-score {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* Animation for correct/incorrect answers */
+@keyframes flashCorrect {
+    0% { background-color: rgba(76, 201, 240, 0.1); }
+    50% { background-color: rgba(76, 201, 240, 0.3); }
+    100% { background-color: rgba(76, 201, 240, 0.1); }
+}
+
+@keyframes flashIncorrect {
+    0% { background-color: rgba(239, 35, 60, 0.1); }
+    50% { background-color: rgba(239, 35, 60, 0.3); }
+    100% { background-color: rgba(239, 35, 60, 0.1); }
+}
+
+.option-label.correct {
+    animation: flashCorrect 1s ease-in-out;
+}
+
+.option-label.incorrect {
+    animation: flashIncorrect 1s ease-in-out;
+}
     </style>
 </head>
 <body>
@@ -1584,6 +2092,9 @@
                     </a>
                 </div>
             </div>
+            <button class="dark-mode-toggle" id="darkModeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
         </header>
         
         <main>
@@ -1617,7 +2128,11 @@
                     <div class="category-tab">Sports</div>
                     <div class="category-tab">Technology</div>
                 </div>
-
+                <div class="search-bar">
+                  <input type="text" placeholder="Search quizzes..." id="searchInput">
+                  <button id="searchBtn"><i class="fas fa-search"></i></button>
+              </div>
+              
                 <div class="quiz-grid" id="quizGrid">
                     <!-- Quizzes will be loaded here -->
                     <div class="quiz-card">
@@ -1626,19 +2141,7 @@
                             <span class="quiz-category">Science</span>
                             <span class="quiz-difficulty difficulty-medium">Medium</span>
                         </div>
-                        <div class="quiz-content">
-                            <h3 class="quiz-title">Science Trivia Challenge</h3>
-                            <p class="quiz-description">Test your knowledge of basic science concepts with this fun quiz!</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-stats">
-                                    <span><i class="fas fa-question"></i> 10</span>
-                                    <span><i class="fas fa-users"></i> 245</span>
-                                    <span><i class="fas fa-star"></i> 4.8</span>
-                                </div>
-                                <div class="quiz-author">
-                                    <div class="author-avatar">S</div>
-                                    <span>ScienceGuy</span>
-                                </div>
+                       
                             </div>
                             <div class="quiz-actions">
                                 <button class="take-quiz-btn">
@@ -1650,70 +2153,18 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="quiz-card">
-                        <div class="quiz-image">
-                            <span>W</span>
-                            <span class="quiz-category">Geography</span>
-                            <span class="quiz-difficulty difficulty-easy">Easy</span>
-                        </div>
-                        <div class="quiz-content">
-                            <h3 class="quiz-title">World Capitals</h3>
-                            <p class="quiz-description">How well do you know the capitals of the world? Take this quiz to find out!</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-stats">
-                                    <span><i class="fas fa-question"></i> 15</span>
-                                    <span><i class="fas fa-users"></i> 189</span>
-                                    <span><i class="fas fa-star"></i> 4.5</span>
-                                </div>
-                                <div class="quiz-author">
-                                    <div class="author-avatar">T</div>
-                                    <span>Traveler</span>
-                                </div>
-                            </div>
-                            <div class="quiz-actions">
-                                <button class="take-quiz-btn">
-                                    <i class="fas fa-play"></i> Take Quiz
-                                </button>
-                                <button class="live-quiz-btn">
-                                    <i class="fas fa-bolt"></i> Live
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="quiz-card">
-                        <div class="quiz-image">
-                            <span>M</span>
-                            <span class="quiz-category">Movies</span>
-                            <span class="quiz-difficulty difficulty-hard">Hard</span>
-                        </div>
-                        <div class="quiz-content">
-                            <h3 class="quiz-title">Movie Quotes Challenge</h3>
-                            <p class="quiz-description">Can you identify these famous movie quotes? Only true movie buffs will ace this!</p>
-                            <div class="quiz-meta">
-                                <div class="quiz-stats">
-                                    <span><i class="fas fa-question"></i> 20</span>
-                                    <span><i class="fas fa-users"></i> 312</span>
-                                    <span><i class="fas fa-star"></i> 4.9</span>
-                                </div>
-                                <div class="quiz-author">
-                                    <div class="author-avatar">C</div>
-                                    <span>Cinephile</span>
-                                </div>
-                            </div>
-                            <div class="quiz-actions">
-                                <button class="take-quiz-btn">
-                                    <i class="fas fa-play"></i> Take Quiz
-                                </button>
-                                <button class="live-quiz-btn">
-                                    <i class="fas fa-bolt"></i> Live
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                       
+                          
+<!-- Add to resultsPage section -->
+<div class="quiz-feedback mt-20">
+  <h3>Leave Feedback</h3>
+  <textarea id="feedbackText" placeholder="What did you think of this quiz?" rows="3" class="form-control"></textarea>
+  <button class="primary-btn" id="submitFeedbackBtn">Submit Feedback</button>
+  
+  <div class="feedback-list" id="feedbackList">
+      <!-- Feedback comments will be loaded here -->
+  </div>
+</div>
                 <div class="section-title">
                     <h2><i class="fas fa-chart-line"></i> Trending Now</h2>
                     <a href="#" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
@@ -1723,7 +2174,40 @@
                     <!-- More quizzes can be added here -->
                 </div>
             </section>
-
+<!-- Add a new section for user profile -->
+<section id="profilePage" class="hidden">
+  <div class="profile-header">
+      <div class="profile-avatar">${currentUser?.displayName?.charAt(0) || 'U'}</div>
+      <h2>${currentUser?.displayName || 'User'}</h2>
+      <p class="profile-email">${currentUser?.email || ''}</p>
+  </div>
+  
+  <div class="profile-stats">
+      <div class="stat-card">
+          <div class="stat-value" id="quizzesCreated">0</div>
+          <div class="stat-label">Quizzes Created</div>
+      </div>
+      <div class="stat-card">
+          <div class="stat-value" id="quizzesTaken">0</div>
+          <div class="stat-label">Quizzes Taken</div>
+      </div>
+      <div class="stat-card">
+          <div class="stat-value" id="totalPoints">0</div>
+          <div class="stat-label">Total Points</div>
+      </div>
+  </div>
+  
+  <div class="profile-tabs">
+      <div class="profile-tab active" data-tab="created">Created Quizzes</div>
+      <div class="profile-tab" data-tab="taken">Taken Quizzes</div>
+  </div>
+  
+  <div class="profile-content">
+      <div class="quiz-grid" id="profileQuizzesGrid">
+          <!-- User's quizzes will be loaded here -->
+      </div>
+  </div>
+</section>
             <!-- Quiz Creator (hidden by default) -->
             <section id="quizCreator" class="hidden">
                 <div class="quiz-creator">
@@ -1734,7 +2218,8 @@
                         <div class="quiz-settings">
                             <div class="form-group">
                                 <label for="quizTitle">Quiz Title</label>
-                                <input type="text" id="quizTitle" placeholder="Enter quiz title">
+                                <input type="text" id="quizTitle" placeholder="Enter quiz title" class="form-control">
+                                <div class="error-message" id="quizTitleError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="quizCategory">Category</label>
@@ -1749,6 +2234,7 @@
                                     <option value="Technology">Technology</option>
                                     <option value="Other">Other</option>
                                 </select>
+                                <div class="error-message" id="quizCategoryError"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -1768,13 +2254,52 @@
                             <div class="form-group">
                                 <label for="timeLimit">Time Limit (minutes)</label>
                                 <div class="time-limit-container">
-                                    <input type="number" id="timeLimit" min="1" max="120" value="10">
+                                    <input type="number" id="timeLimit" min="1" max="120" value="10" class="form-control">
                                     <span>minutes</span>
                                 </div>
+                                <div class="error-message" id="timeLimitError"></div>
                             </div>
                         </div>
                     </div>
-                    
+                    <!-- Add a new section for participant view -->
+<section id="participantView" class="hidden">
+  <div class="quiz-header">
+      <h2 id="participantQuizTitle">Live Quiz</h2>
+      <div class="quiz-code">Game Code: <span id="participantGameCode">-----</span></div>
+  </div>
+  
+  <div class="quiz-status" id="quizStatus">
+      Waiting for host to start the quiz...
+  </div>
+  
+  <div class="question-container hidden" id="participantQuestionContainer">
+      <div class="question-header">
+          <div class="question-number">Question <span id="currentQNumber">1</span></div>
+          <div class="timer-container">
+              <i class="fas fa-clock"></i>
+              <span id="participantTimer">30</span>
+          </div>
+      </div>
+      
+      <div class="question-text" id="participantQuestionText"></div>
+      
+      <ul class="options-list" id="participantOptionsList"></ul>
+      
+      <div class="powerup-indicators">
+          <div class="strike-indicator hidden" id="strikeIndicator">
+              <i class="fas fa-bolt"></i> Strikes: <span id="strikeCount">0</span>/3
+          </div>
+          <div class="shield-indicator hidden" id="shieldIndicator">
+              <i class="fas fa-shield-alt"></i> Shield Active
+          </div>
+      </div>
+  </div>
+  
+  <div class="leaderboard-container hidden" id="participantLeaderboard">
+      <h3>Leaderboard</h3>
+      <div id="participantLeaderboardList"></div>
+  </div>
+</section>
                     <div class="form-section">
                         <h3><i class="fas fa-question-circle"></i> Questions</h3>
                         <div id="questionsContainer">
@@ -1895,73 +2420,114 @@
                 </div>
             </section>
 
-            <!-- Live Dashboard (hidden by default) -->
-            <section id="liveDashboard" class="hidden">
-                <div class="dashboard">
-                    <div class="sidebar">
-                        <div class="live-quiz-header">
-                            <h3 class="live-quiz-title">Live Quiz</h3>
-                            <div class="live-quiz-code">ZQ-5A9B</div>
-                        </div>
-                        
-                        <h3><i class="fas fa-users"></i> Participants (5)</h3>
-                        <ul class="participant-list" id="participantList">
-                            <li class="participant-item">
-                                <div class="participant-info">
-                                    <div class="participant-avatar">J</div>
-                                    <span>JohnDoe</span>
-                                </div>
-                                <div class="participant-status"></div>
-                            </li>
-                            <li class="participant-item">
-                                <div class="participant-info">
-                                    <div class="participant-avatar">S</div>
-                                    <span>SarahSmith</span>
-                                </div>
-                                <div class="participant-status"></div>
-                            </li>
-                            <li class="participant-item">
-                                <div class="participant-info">
-                                    <div class="participant-avatar">M</div>
-                                    <span>MikeJohnson</span>
-                                </div>
-                                <div class="participant-status offline"></div>
-                            </li>
-                        </ul>
-                        
-                        <div class="leaderboard">
-                            <div class="leaderboard-title">
-                                <h3><i class="fas fa-trophy"></i> Leaderboard</h3>
-                            </div>
-                            <div id="leaderboard">
-                                <div class="leaderboard-item">
-                                    <div class="leaderboard-position">1</div>
-                                    <div class="leaderboard-user">
-                                        <div class="participant-avatar">J</div>
-                                        <span>JohnDoe</span>
-                                    </div>
-                                    <div class="leaderboard-score">850</div>
-                                </div>
-                                <div class="leaderboard-item">
-                                    <div class="leaderboard-position">2</div>
-                                    <div class="leaderboard-user">
-                                        <div class="participant-avatar">S</div>
-                                        <span>SarahSmith</span>
-                                    </div>
-                                    <div class="leaderboard-score">720</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="main-content">
-                        <div class="live-quiz-header">
-                            <h2 class="live-quiz-title">Science Trivia Challenge</h2>
-                            <div class="timer-container">
-                                <i class="fas fa-clock"></i>
-                                <span>00:15</span>
-                            </div>
-                        </div>
+<!-- Add to your liveDashboard section -->
+<section id="liveDashboard" class="hidden">
+  <div class="dashboard-container">
+      <div class="game-controls">
+          <div class="quiz-info">
+              <h2 id="liveQuizTitle">Live Quiz</h2>
+              <div class="quiz-code">Game Code: <span id="gameCodeDisplay">-----</span></div>
+          </div>
+          <div class="control-buttons">
+              <button id="startGameBtn" class="control-btn start-btn">
+                  <i class="fas fa-play"></i> Start Quiz
+              </button>
+              <button id="nextQuestionBtn" class="control-btn next-btn" disabled>
+                  <i class="fas fa-forward"></i> Next Question
+              </button>
+              <button id="endGameBtn" class="control-btn end-btn">
+                  <i class="fas fa-stop"></i> End Quiz
+              </button>
+              <button id="copyLinkBtn" class="control-btn share-btn">
+                  <i class="fas fa-copy"></i> Copy Join Link
+              </button>
+          </div>
+      </div>
+
+      <div class="game-modes">
+          <h3>Game Modes</h3>
+          <div class="mode-selector">
+              <div class="mode-option active" data-mode="normal">
+                  <i class="fas fa-question"></i> Normal
+              </div>
+              <div class="mode-option" data-mode="strike">
+                  <i class="fas fa-bolt"></i> Strike
+              </div>
+              <div class="mode-option" data-mode="shield">
+                  <i class="fas fa-shield-alt"></i> Shield
+              </div>
+          </div>
+      </div>
+
+      <div class="dashboard-content">
+          <div class="participants-section">
+              <h3>Participants <span id="participantCount">0</span></h3>
+              <div class="participant-list" id="participantList">
+                  <!-- Participants will be added here -->
+              </div>
+          </div>
+
+          <div class="question-section">
+              <div class="current-question">
+                  <h3>Current Question</h3>
+                  <div id="currentQuestionDisplay">
+                      <p>Waiting to start...</p>
+                  </div>
+              </div>
+
+              <div class="power-ups">
+                  <h3>Power Plays</h3>
+                  <div class="powerup-grid">
+                      <div class="powerup-card" data-power="doublePoints">
+                          <i class="fas fa-gem"></i>
+                          <span>Double Points</span>
+                      </div>
+                      <div class="powerup-card" data-power="timeBoost">
+                          <i class="fas fa-clock"></i>
+                          <span>Time Boost</span>
+                      </div>
+                      <div class="powerup-card" data-power="revealAnswer">
+                          <i class="fas fa-eye"></i>
+                          <span>Reveal Answer</span>
+                      </div>
+                      <div class="powerup-card" data-power="randomShield">
+                          <i class="fas fa-random"></i>
+                          <span>Random Shield</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="stats-section">
+              <div class="stats-card">
+                  <h4>Question Stats</h4>
+                  <div id="questionStats">
+                      <div class="stat-item">
+                          <span class="stat-label">Answered:</span>
+                          <span class="stat-value" id="answeredCount">0</span>
+                      </div>
+                      <div class="stat-item">
+                          <span class="stat-label">Correct:</span>
+                          <span class="stat-value" id="correctCount">0%</span>
+                      </div>
+                      <div class="stat-item">
+                          <span class="stat-label">Avg Time:</span>
+                          <span class="stat-value" id="avgTime">0s</span>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="leaderboard-card">
+                  <h4>Leaderboard</h4>
+                  <div id="leaderboard">
+                      <!-- Leaderboard will be populated here -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+                
                         
                         <div class="quiz-control-panel">
                             <div class="control-buttons">
@@ -1977,72 +2543,7 @@
                             </div>
                         </div>
                         
-                        <div class="current-question">
-                            <h3>Current Question</h3>
-                            <div id="currentQuestionDisplay">
-                                <p>What is the chemical symbol for gold?</p>
-                            </div>
-                            
-                            <div class="question-stats">
-                                <div class="stat-card">
-                                    <div class="stat-value">5</div>
-                                    <div class="stat-label">Participants</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-value">3</div>
-                                    <div class="stat-label">Answered</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-value">60%</div>
-                                    <div class="stat-label">Correct</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-value">12s</div>
-                                    <div class="stat-label">Avg Time</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="answer-distribution">
-                            <h3>Answer Distribution</h3>
-                            <div class="distribution-option">
-                                <span>A. Go</span>
-                                <span>0% (0)</span>
-                            </div>
-                            <div class="distribution-bar">
-                                <div class="distribution-fill" style="width: 0%"></div>
-                            </div>
-                            
-                            <div class="distribution-option">
-                                <span>B. Gd</span>
-                                <span>20% (1)</span>
-                            </div>
-                            <div class="distribution-bar">
-                                <div class="distribution-fill" style="width: 20%"></div>
-                            </div>
-                            
-                            <div class="distribution-option">
-                                <span>C. Au</span>
-                                <span>60% (3)</span>
-                            </div>
-                            <div class="distribution-bar">
-                                <div class="distribution-fill" style="width: 60%"></div>
-                            </div>
-                            
-                            <div class="distribution-option">
-                                <span>D. Ag</span>
-                                <span>20% (1)</span>
-                            </div>
-                            <div class="distribution-bar">
-                                <div class="distribution-fill" style="width: 20%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
+      
     <!-- Auth Modals -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
@@ -2056,12 +2557,14 @@
                 <h2>Welcome Back!</h2>
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" placeholder="Enter your email">
+                    <input type="email" id="loginEmail" placeholder="Enter your email" class="form-control">
+                    <div class="error-message" id="loginEmailError"></div>
                 </div>
                 <div class="form-group password-container">
                     <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                    <input type="password" id="loginPassword" placeholder="Enter your password" class="form-control">
                     <i class="fas fa-eye toggle-password" id="toggleLoginPassword"></i>
+                    <div class="error-message" id="loginPasswordError"></div>
                 </div>
                 <div class="form-group text-center">
                     <a href="#" id="forgotPassword">Forgot password?</a>
@@ -2105,25 +2608,30 @@
                 <h2>Create Your Account</h2>
                 <div class="form-group">
                     <label for="registerUsername">Username</label>
-                    <input type="text" id="registerUsername" placeholder="Choose a username">
+                    <input type="text" id="registerUsername" placeholder="Choose a username" class="form-control">
+                    <div class="error-message" id="registerUsernameError"></div>
                 </div>
                 <div class="form-group">
                     <label for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" placeholder="Enter your email">
+                    <input type="email" id="registerEmail" placeholder="Enter your email" class="form-control">
+                    <div class="error-message" id="registerEmailError"></div>
                 </div>
                 <div class="form-group password-container">
                     <label for="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" placeholder="Create a password">
+                    <input type="password" id="registerPassword" placeholder="Create a password" class="form-control">
                     <i class="fas fa-eye toggle-password" id="toggleRegisterPassword"></i>
+                    <div class="error-message" id="registerPasswordError"></div>
                 </div>
                 <div class="form-group password-container">
                     <label for="registerConfirmPassword">Confirm Password</label>
-                    <input type="password" id="registerConfirmPassword" placeholder="Confirm your password">
+                    <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" class="form-control">
                     <i class="fas fa-eye toggle-password" id="toggleRegisterConfirmPassword"></i>
+                    <div class="error-message" id="registerConfirmPasswordError"></div>
                 </div>
                 <div class="form-group">
                     <input type="checkbox" id="agreeTerms">
                     <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    <div class="error-message" id="agreeTermsError"></div>
                 </div>
                 <button class="submit-btn" id="registerSubmitBtn">
                     <span id="registerBtnText">Sign Up</span>
@@ -2153,7 +2661,7 @@
     </div>
 
    <script>
-   const firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyB0Aj452H6Gp1ociH4ufHrLiU6Uucb-ysM",
             authDomain: "who-is-the-spy-51308.firebaseapp.com",
             databaseURL: "https://who-is-the-spy-51308-default-rtdb.europe-west1.firebasedatabase.app",
@@ -2177,6 +2685,7 @@
         const userAvatar = document.getElementById('userAvatar');
         const username = document.getElementById('username');
         const logoutBtn = document.getElementById('logoutBtn');
+        const darkModeToggle = document.getElementById('darkModeToggle');
         
         const loginModal = document.getElementById('loginModal');
         const registerModal = document.getElementById('registerModal');
@@ -2260,6 +2769,12 @@
 
         // Initialize the app
         function init() {
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
             auth.onAuthStateChanged(user => {
                 if (user) {
                     // User is signed in
@@ -2291,11 +2806,13 @@
             loginBtn.addEventListener('click', () => {
                 loginModal.style.display = 'flex';
                 registerModal.style.display = 'none';
+                clearErrorMessages();
             });
             
             registerBtn.addEventListener('click', () => {
                 registerModal.style.display = 'flex';
                 loginModal.style.display = 'none';
+                clearErrorMessages();
             });
             
             // Modal close buttons
@@ -2303,24 +2820,32 @@
             closeRegisterModal.addEventListener('click', () => registerModal.style.display = 'none');
             
             // Switch between login and register
-            showRegister.addEventListener('click', () => {
+            showRegister.addEventListener('click', (e) => {
+                e.preventDefault();
                 loginModal.style.display = 'none';
                 registerModal.style.display = 'flex';
+                clearErrorMessages();
             });
             
-            showLogin.addEventListener('click', () => {
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
                 registerModal.style.display = 'none';
                 loginModal.style.display = 'flex';
+                clearErrorMessages();
             });
             
-            switchToRegister.addEventListener('click', () => {
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
                 loginModal.style.display = 'none';
                 registerModal.style.display = 'flex';
+                clearErrorMessages();
             });
             
-            switchToLogin.addEventListener('click', () => {
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
                 registerModal.style.display = 'none';
                 loginModal.style.display = 'flex';
+                clearErrorMessages();
             });
             
             // Toggle password visibility
@@ -2342,58 +2867,9 @@
             forgotPassword.addEventListener('click', resetPassword);
             logoutBtn.addEventListener('click', logoutUser);
             
-            const darkModeToggle = document.createElement('button');
-darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-darkModeToggle.className = 'dark-mode-toggle';
-document.querySelector('header').appendChild(darkModeToggle);
-
-darkModeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-});
-
-// Check for saved preference
-if (localStorage.getItem('darkMode') === 'true') {
-  document.body.classList.add('dark-mode');
-}
-function saveQuestionToBank(question) {
-  if (!currentUser) return;
-  
-  db.ref(`users/${currentUser.uid}/questionBank`).push(question)
-    .then(() => {
-      alert('Question saved to your bank!');
-    });
-}
-
-// Add a "Save to Bank" button to each question in creator
-function addQuestionBankButton(questionDiv, questionObj) {
-  const bankBtn = document.createElement('button');
-  bankBtn.className = 'bank-btn';
-  bankBtn.innerHTML = '<i class="fas fa-save"></i> Save to Bank';
-  bankBtn.addEventListener('click', () => saveQuestionToBank(questionObj));
-  questionDiv.querySelector('.question-item-header').appendChild(bankBtn);
-}
-function generateResultImage() {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  
-  // Draw your result card on canvas
-  // Then convert to image and share
-  canvas.toBlob(blob => {
-    const file = new File([blob], 'quiz-result.png', {type: 'image/png'});
-    
-    if (navigator.share) {
-      navigator.share({
-        files: [file],
-        title: 'My Quiz Result',
-        text: `I scored ${quizResults.score}/${quizResults.total} on ${currentQuiz.title}!`
-      });
-    }
-  });
-}
-
-// Add to share button
-shareBtn.addEventListener('click', generateResultImage);
+            // Dark mode toggle
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+            
             // Navigation
             createQuizBtn.addEventListener('click', showQuizCreator);
             exploreBtn.addEventListener('click', showHomePage);
@@ -2425,13 +2901,40 @@ shareBtn.addEventListener('click', generateResultImage);
             }
         }
 
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        function clearErrorMessages() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+        }
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+      
         // Auth Functions
         function loginUser() {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            if (!email || !password) {
-                alert('Please fill in all fields');
+            clearErrorMessages();
+            
+            if (!email) {
+                showError('loginEmailError', 'Please enter your email');
+                return;
+            }
+            
+            if (!password) {
+                showError('loginPasswordError', 'Please enter your password');
                 return;
             }
             
@@ -2445,7 +2948,7 @@ shareBtn.addEventListener('click', generateResultImage);
                     clearAuthForms();
                 })
                 .catch(error => {
-                    alert(error.message);
+                    showError('loginPasswordError', error.message);
                 })
                 .finally(() => {
                     // Hide loading state
@@ -2461,18 +2964,40 @@ shareBtn.addEventListener('click', generateResultImage);
             const confirmPassword = document.getElementById('registerConfirmPassword').value;
             const agreeTerms = document.getElementById('agreeTerms').checked;
             
-            if (!username || !email || !password || !confirmPassword) {
-                alert('Please fill in all fields');
+            clearErrorMessages();
+            
+            if (!username) {
+                showError('registerUsernameError', 'Please choose a username');
                 return;
             }
             
-            if (!agreeTerms) {
-                alert('You must agree to the Terms of Service and Privacy Policy');
+            if (!email) {
+                showError('registerEmailError', 'Please enter your email');
+                return;
+            }
+            
+            if (!password) {
+                showError('registerPasswordError', 'Please create a password');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('registerPasswordError', 'Password must be at least 6 characters');
+                return;
+            }
+            
+            if (!confirmPassword) {
+                showError('registerConfirmPasswordError', 'Please confirm your password');
                 return;
             }
             
             if (password !== confirmPassword) {
-                alert("Passwords don't match!");
+                showError('registerConfirmPasswordError', "Passwords don't match");
+                return;
+            }
+            
+            if (!agreeTerms) {
+                showError('agreeTermsError', 'You must agree to the terms');
                 return;
             }
             
@@ -2502,7 +3027,7 @@ shareBtn.addEventListener('click', generateResultImage);
                     clearAuthForms();
                 })
                 .catch(error => {
-                    alert(error.message);
+                    showError('registerEmailError', error.message);
                 })
                 .finally(() => {
                     // Hide loading state
@@ -2510,12 +3035,46 @@ shareBtn.addEventListener('click', generateResultImage);
                     registerSpinner.classList.add('hidden');
                 });
         }
-        
-        function resetPassword() {
+        const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+
+function searchQuizzes() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    if (!searchTerm) {
+        loadQuizzes();
+        return;
+    }
+    
+    db.ref('quizzes').orderByChild('isPublic').equalTo(true).once('value')
+        .then(snapshot => {
+            quizGrid.innerHTML = '';
+            const quizzes = snapshot.val() || {};
+            
+            Object.keys(quizzes).forEach(quizId => {
+                const quiz = quizzes[quizId];
+                if (quiz.title.toLowerCase().includes(searchTerm) || 
+                    quiz.description.toLowerCase().includes(searchTerm) ||
+                    quiz.category.toLowerCase().includes(searchTerm)) {
+                    createQuizCard(quizId, quiz);
+                }
+            });
+            
+            if (quizGrid.children.length === 0) {
+                quizGrid.innerHTML = '<div class="no-results">No quizzes found matching your search.</div>';
+            }
+        });
+}
+
+searchBtn.addEventListener('click', searchQuizzes);
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') searchQuizzes();
+});
+        function resetPassword(e) {
+            e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             
             if (!email) {
-                alert('Please enter your email address');
+                showError('loginEmailError', 'Please enter your email address');
                 return;
             }
             
@@ -2525,7 +3084,7 @@ shareBtn.addEventListener('click', generateResultImage);
                     loginModal.style.display = 'none';
                 })
                 .catch(error => {
-                    alert(error.message);
+                    showError('loginEmailError', error.message);
                 });
         }
         
@@ -2547,6 +3106,7 @@ shareBtn.addEventListener('click', generateResultImage);
             document.getElementById('registerPassword').value = '';
             document.getElementById('registerConfirmPassword').value = '';
             document.getElementById('agreeTerms').checked = false;
+            clearErrorMessages();
         }
 
         // Quiz Functions
@@ -2613,7 +3173,708 @@ shareBtn.addEventListener('click', generateResultImage);
             quizCard.querySelector('.take-quiz-btn').addEventListener('click', function() {
                 startQuiz(quizId);
             });
+            function setupRatingSystem() {
+    const stars = document.querySelectorAll('#ratingStars i');
+    let selectedRating = 0;
+    
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            selectedRating = parseInt(this.getAttribute('data-rating'));
             
+            // Update UI
+            stars.forEach((s, index) => {
+                if (index < selectedRating) {
+                    s.classList.remove('far');
+                    s.classList.add('fas');
+                } else {
+                    s.classList.remove('fas');
+                    s.classList.add('far');
+                }
+            });
+            
+            // Save rating to database
+            if (currentUser && currentQuiz) {
+                // Get current rating data
+                db.ref(`quizzes/${currentQuiz.id}/ratings`).once('value')
+                    .then(snapshot => {
+                        const ratings = snapshot.val() || {};
+                        const userRatings = ratings[currentUser.uid] || {};
+                        
+                        // Update user's rating
+                        userRatings.rating = selectedRating;
+                        userRatings.timestamp = firebase.database.ServerValue.TIMESTAMP;
+                        
+                        // Calculate new average rating
+                        let total = 0;
+                        let count = 0;
+                        
+                        Object.values(ratings).forEach(r => {
+                            if (r.rating) {
+                                total += r.rating;
+                                count++;
+                            }
+                        });
+                        
+                        // Add new rating to total
+                        if (!ratings[currentUser.uid] || !ratings[currentUser.uid].rating) {
+                            total += selectedRating;
+                            count++;
+                        }
+                        
+                        const averageRating = count > 0 ? total / count : 0;
+                        
+                        // Update database
+                        return db.ref(`quizzes/${currentQuiz.id}`).update({
+                            rating: averageRating,
+                            ratingsCount: count,
+                            [`ratings/${currentUser.uid}`]: userRatings
+                        });
+                    })
+                    .then(() => {
+                        alert('Thank you for rating this quiz!');
+                    })
+                    .catch(error => {
+                        console.error("Error saving rating:", error);
+                    });
+            }
+        });
+        // Add to JavaScript
+function showProfilePage() {
+    if (!currentUser) {
+        alert('Please log in to view your profile');
+        return;
+    }
+    
+    homePage.classList.add('hidden');
+    quizCreator.classList.add('hidden');
+    quizPlayer.classList.add('hidden');
+    resultsPage.classList.add('hidden');
+    liveDashboard.classList.add('hidden');
+    savedQuizzesPage.classList.add('hidden');
+    profilePage.classList.remove('hidden');
+    
+    loadProfileData();
+}
+
+function loadProfileData() {
+    // Load user stats
+    db.ref(`users/${currentUser.uid}`).once('value')
+        .then(snapshot => {
+            const userData = snapshot.val() || {};
+            
+            document.getElementById('quizzesCreated').textContent = userData.quizzesCreated || 0;
+            document.getElementById('quizzesTaken').textContent = userData.quizzesTaken || 0;
+            document.getElementById('totalPoints').textContent = userData.totalPoints || 0;
+            
+            // Load created quizzes
+            loadUserCreatedQuizzes();
+        });
+}
+
+function loadUserCreatedQuizzes() {
+    db.ref('quizzes').orderByChild('creatorId').equalTo(currentUser.uid).once('value')
+        .then(snapshot => {
+            profileQuizzesGrid.innerHTML = '';
+            const quizzes = snapshot.val() || {};
+            
+            if (Object.keys(quizzes).length === 0) {
+                profileQuizzesGrid.innerHTML = '<div class="no-quizzes">You haven\'t created any quizzes yet.</div>';
+                return;
+            }
+            
+            Object.keys(quizzes).forEach(quizId => {
+                createQuizCard(quizId, quizzes[quizId], false, true);
+            });
+        });
+}
+
+function loadUserTakenQuizzes() {
+    db.ref(`users/${currentUser.uid}/takenQuizzes`).once('value')
+        .then(snapshot => {
+            profileQuizzesGrid.innerHTML = '';
+            const takenQuizzes = snapshot.val() || {};
+            const quizIds = Object.keys(takenQuizzes);
+            
+            if (quizIds.length === 0) {
+                profileQuizzesGrid.innerHTML = '<div class="no-quizzes">You haven\'t taken any quizzes yet.</div>';
+                return;
+            }
+            
+            // Fetch each quiz
+            const fetchPromises = quizIds.map(quizId => {
+                return db.ref(`quizzes/${quizId}`).once('value')
+                    .then(quizSnapshot => {
+                        if (quizSnapshot.exists()) {
+                            const quiz = quizSnapshot.val();
+                            const result = takenQuizzes[quizId];
+                            
+                            // Create a modified quiz card showing the result
+                            const quizCard = document.createElement('div');
+                            quizCard.className = 'quiz-card fade-in';
+                            quizCard.innerHTML = `
+                                <div class="quiz-image">${quiz.title.charAt(0)}</div>
+                                <div class="quiz-content">
+                                    <h3 class="quiz-title">${quiz.title}</h3>
+                                    <div class="quiz-result">
+                                        <span class="result-score">${result.score}/${quiz.questions.length}</span>
+                                        <span class="result-percentage">${result.percentage}%</span>
+                                    </div>
+                                    <div class="quiz-meta">
+                                        <div class="quiz-stats">
+                                            <span><i class="fas fa-calendar-alt"></i> ${formatDate(result.dateTaken)}</span>
+                                        </div>
+                                    </div>
+                                    <div class="quiz-actions">
+                                        <button class="take-quiz-btn" data-id="${quizId}">
+                                            <i class="fas fa-redo"></i> Retake
+                                        </button>
+                                        <button class="view-results-btn" data-id="${quizId}">
+                                            <i class="fas fa-chart-bar"></i> View Results
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                            profileQuizzesGrid.appendChild(quizCard);
+                            
+                            // Add event listeners
+                            quizCard.querySelector('.take-quiz-btn').addEventListener('click', function() {
+                                startQuiz(quizId);
+                            });
+                            
+                            quizCard.querySelector('.view-results-btn').addEventListener('click', function() {
+                                // You would need to implement a function to show past results
+                                showPastResults(quizId, result);
+                            });
+                        }
+                    });
+            });
+            
+            return Promise.all(fetchPromises);
+        });
+}
+
+// Add tab switching
+document.querySelectorAll('.profile-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelector('.profile-tab.active').classList.remove('active');
+        this.classList.add('active');
+        
+        if (this.dataset.tab === 'created') {
+            loadUserCreatedQuizzes();
+        } else {
+            loadUserTakenQuizzes();
+        }
+    });
+});
+// Add to user profile
+const achievements = [
+    { id: 'quiz_master', name: 'Quiz Master', description: 'Create 10 quizzes', icon: 'fas fa-crown', earned: false },
+    { id: 'fast_learner', name: 'Fast Learner', description: 'Complete a quiz in under 1 minute', icon: 'fas fa-bolt', earned: false },
+    { id: 'perfectionist', name: 'Perfectionist', description: 'Score 100% on a quiz', icon: 'fas fa-star', earned: false },
+    { id: 'social_butterfly', name: 'Social Butterfly', description: 'Share 5 quiz results', icon: 'fas fa-share-alt', earned: false }
+];
+
+// Check and award achievements
+function checkAchievements(userId) {
+    db.ref(`users/${userId}`).once('value').then(snapshot => {
+        const user = snapshot.val();
+        const updates = {};
+        
+        // Quiz Master
+        if (user.quizzesCreated >= 10 && !user.achievements?.quiz_master) {
+            updates['achievements/quiz_master'] = true;
+        }
+        
+        // Perfectionist
+        db.ref(`users/${userId}/takenQuizzes`).once('value').then(takenSnapshot => {
+            const takenQuizzes = takenSnapshot.val() || {};
+            Object.values(takenQuizzes).forEach(quiz => {
+                if (quiz.percentage === 100 && !user.achievements?.perfectionist) {
+                    updates['achievements/perfectionist'] = true;
+                }
+            });
+            
+            // Apply all updates
+            if (Object.keys(updates).length > 0) {
+                db.ref(`users/${userId}`).update(updates);
+                showAchievementNotification(updates);
+            }
+        });
+    });
+}
+
+function showAchievementNotification(achievements) {
+    Object.keys(achievements).forEach(achId => {
+        const achievement = achievements.find(a => a.id === achId.split('/')[1]);
+        if (achievement) {
+            const notif = document.createElement('div');
+            notif.className = 'achievement-notification';
+            notif.innerHTML = `
+                <div class="achievement-badge">
+                    <i class="${achievement.icon}"></i>
+                </div>
+                <div class="achievement-text">
+                    <strong>${achievement.name}</strong>
+                    <p>${achievement.description}</p>
+                </div>
+            `;
+            document.body.appendChild(notif);
+            
+            setTimeout(() => {
+                notif.classList.add('show');
+                setTimeout(() => {
+                    notif.classList.remove('show');
+                    setTimeout(() => notif.remove(), 500);
+                }, 3000);
+            }, 100);
+        }
+    });
+}
+// Global leaderboard
+function showGlobalLeaderboard() {
+    db.ref('users').orderByChild('totalPoints').limitToLast(10).once('value')
+        .then(snapshot => {
+            const users = snapshot.val() || {};
+            const leaderboard = Object.entries(users)
+                .map(([id, user]) => ({ id, ...user }))
+                .sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0));
+            
+            const leaderboardHTML = leaderboard.map((user, index) => `
+                <div class="leaderboard-item">
+                    <div class="leaderboard-position">${index + 1}</div>
+                    <div class="leaderboard-user">
+                        <div class="user-avatar">${user.username?.charAt(0) || 'U'}</div>
+                        <span>${user.username || 'Anonymous'}</span>
+                    </div>
+                    <div class="leaderboard-score">${user.totalPoints || 0}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('globalLeaderboard').innerHTML = leaderboardHTML;
+        });
+}
+// Add question type selector to quiz creator
+function addQuestion() {
+    const questionId = 'question-' + Date.now();
+    const questionDiv = document.createElement('div');
+    questionDiv.className = 'question-item fade-in';
+    questionDiv.innerHTML = `
+        <div class="question-item-header">
+            <select class="question-type-selector">
+                <option value="multiple">Multiple Choice</option>
+                <option value="truefalse">True/False</option>
+                <option value="shortanswer">Short Answer</option>
+                <option value="matching">Matching</option>
+                <option value="ordering">Put in Order</option>
+            </select>
+            <div class="question-points">
+                Points: <input type="number" min="1" value="1" class="question-points-input">
+            </div>
+        </div>
+        <div class="question-content">
+            <!-- Content will be dynamically generated based on type -->
+        </div>
+    `;
+    
+    // Handle type changes
+    const typeSelector = questionDiv.querySelector('.question-type-selector');
+    typeSelector.addEventListener('change', function() {
+        updateQuestionType(questionDiv, this.value);
+    });
+    
+    // Set initial type
+    updateQuestionType(questionDiv, typeSelector.value);
+}
+
+function updateQuestionType(questionDiv, type) {
+    const contentDiv = questionDiv.querySelector('.question-content');
+    
+    switch(type) {
+        case 'multiple':
+            contentDiv.innerHTML = `
+                <div class="form-group">
+                    <label>Question Text</label>
+                    <input type="text" class="question-input" placeholder="Enter your question" required>
+                </div>
+                <div class="options-container"></div>
+                <button type="button" class="add-option-btn">
+                    <i class="fas fa-plus"></i> Add Option
+                </button>
+            `;
+            // Add initial options
+            addOption(contentDiv.querySelector('.options-container'));
+            addOption(contentDiv.querySelector('.options-container'));
+            break;
+            
+        case 'truefalse':
+            contentDiv.innerHTML = `
+                <div class="form-group">
+                    <label>Statement</label>
+                    <input type="text" class="question-input" placeholder="Enter a true/false statement" required>
+                </div>
+                <div class="form-group">
+                    <label>Correct Answer</label>
+                    <div>
+                        <input type="radio" name="tf-correct" value="true" checked> True
+                        <input type="radio" name="tf-correct" value="false"> False
+                    </div>
+                </div>
+            `;
+            break;
+            
+        case 'shortanswer':
+            contentDiv.innerHTML = `
+                <div class="form-group">
+                    <label>Question</label>
+                    <input type="text" class="question-input" placeholder="Enter your question" required>
+                </div>
+                <div class="form-group">
+                    <label>Correct Answer(s)</label>
+                    <input type="text" class="correct-answer" placeholder="Enter correct answer">
+                    <button type="button" class="add-answer-btn">
+                        <i class="fas fa-plus"></i> Add Alternative Answer
+                    </button>
+                    <div class="alternative-answers"></div>
+                </div>
+            `;
+            break;
+    }
+}
+// Add to results page
+function shareResults() {
+    // ... existing code ...
+    
+    // Add challenge option
+    const challengeDiv = document.createElement('div');
+    challengeDiv.className = 'challenge-options hidden';
+    challengeDiv.innerHTML = `
+        <h4>Challenge Friends</h4>
+        <div class="friend-list"></div>
+        <button class="secondary-btn" id="cancelChallenge">Cancel</button>
+    `;
+    
+    document.querySelector('.share-options').appendChild(challengeDiv);
+    
+    // Load friends list
+    if (currentUser) {
+        db.ref(`users/${currentUser.uid}/friends`).once('value').then(snapshot => {
+            const friends = snapshot.val() || {};
+            const friendList = challengeDiv.querySelector('.friend-list');
+            
+            Object.keys(friends).forEach(friendId => {
+                db.ref(`users/${friendId}`).once('value').then(friendSnapshot => {
+                    const friend = friendSnapshot.val();
+                    if (friend) {
+                        const friendItem = document.createElement('div');
+                        friendItem.className = 'friend-item';
+                        friendItem.innerHTML = `
+                            <div class="friend-avatar">${friend.username?.charAt(0) || 'F'}</div>
+                            <span>${friend.username || 'Friend'}</span>
+                            <button class="challenge-btn" data-id="${friendId}">
+                                Challenge
+                            </button>
+                        `;
+                        friendList.appendChild(friendItem);
+                        
+                        // Handle challenge
+                        friendItem.querySelector('.challenge-btn').addEventListener('click', function() {
+                            sendChallenge(friendId);
+                        });
+                    }
+                });
+            });
+        });
+    }
+}
+
+function sendChallenge(friendId) {
+    const challenge = {
+        quizId: currentQuiz.id,
+        challengerId: currentUser.uid,
+        challengerName: currentUser.displayName || currentUser.email.split('@')[0],
+        challengerScore: quizResults.score,
+        timestamp: firebase.database.ServerValue.TIMESTAMP,
+        status: 'pending'
+    };
+    
+    db.ref(`users/${friendId}/challenges`).push().set(challenge)
+        .then(() => {
+            alert('Challenge sent successfully!');
+        });
+}
+// Add to user profile
+function setupFriendSystem() {
+    // Friend request button
+    document.querySelectorAll('.user-profile').forEach(profile => {
+        const userId = profile.dataset.userId;
+        if (userId !== currentUser?.uid) {
+            const friendBtn = document.createElement('button');
+            friendBtn.className = 'friend-btn';
+            friendBtn.innerHTML = '<i class="fas fa-user-plus"></i> Add Friend';
+            profile.appendChild(friendBtn);
+            
+            // Check friendship status
+            db.ref(`users/${currentUser.uid}/friends/${userId}`).once('value')
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        friendBtn.innerHTML = '<i class="fas fa-check"></i> Friends';
+                        friendBtn.disabled = true;
+                    }
+                });
+            
+            // Send friend request
+            friendBtn.addEventListener('click', function() {
+                db.ref(`friendRequests/${userId}/${currentUser.uid}`).set({
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    status: 'pending'
+                });
+                
+                friendBtn.innerHTML = '<i class="fas fa-clock"></i> Request Sent';
+                friendBtn.disabled = true;
+            });
+        }
+    });
+    
+    // Friend requests notification
+    if (currentUser) {
+        db.ref(`friendRequests/${currentUser.uid}`).on('value', snapshot => {
+            const requests = snapshot.val() || {};
+            const requestCount = Object.keys(requests).length;
+            
+            // Update notification badge
+            const badge = document.querySelector('.friend-requests-badge');
+            if (badge) {
+                badge.textContent = requestCount;
+                badge.style.display = requestCount > 0 ? 'block' : 'none';
+            }
+        });
+    }
+}
+// Add to live quiz setup
+function startLiveQuiz(quizId) {
+    // ... existing code ...
+    
+    // Add team mode option
+    const teamMode = confirm('Enable team mode for this live quiz?');
+    if (teamMode) {
+        db.ref(`liveQuizzes/${liveCode}`).update({
+            teamMode: true,
+            teams: {
+                red: { name: 'Red Team', score: 0, members: {} },
+                blue: { name: 'Blue Team', score: 0, members: {} }
+            }
+        });
+    }
+    
+    // ... rest of startLiveQuiz function ...
+}
+
+// Team selection UI for participants
+function showTeamSelection(liveCode) {
+    const modal = document.createElement('div');
+    modal.className = 'team-selection-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h3>Join a Team</h3>
+            <div class="teams">
+                <div class="team red-team" data-team="red">
+                    <h4>Red Team</h4>
+                    <div class="team-members"></div>
+                    <button class="join-btn">Join</button>
+                </div>
+                <div class="team blue-team" data-team="blue">
+                    <h4>Blue Team</h4>
+                    <div class="team-members"></div>
+                    <button class="join-btn">Join</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Handle team joining
+    modal.querySelectorAll('.join-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const team = this.closest('.team').dataset.team;
+            db.ref(`liveQuizzes/${liveCode}/teams/${team}/members/${currentUser.uid}`).set({
+                name: currentUser.displayName || currentUser.email.split('@')[0],
+                score: 0
+            });
+            
+            modal.remove();
+        });
+    });
+}
+// Add to live quiz
+function setupLiveQuiz(liveCode) {
+    // ... existing code ...
+    
+    // Audience mode (spectators can vote but not affect scores)
+    db.ref(`liveQuizzes/${liveCode}/audience`).on('value', snapshot => {
+        const audienceVotes = snapshot.val() || {};
+        updateAudienceDisplay(audienceVotes);
+    });
+}
+
+function updateAudienceDisplay(votes) {
+    const totalVotes = Object.values(votes).reduce((sum, vote) => sum + vote.count, 0);
+    
+    document.querySelectorAll('.audience-option').forEach((opt, index) => {
+        const voteCount = votes[index]?.count || 0;
+        const percentage = totalVotes > 0 ? Math.round((voteCount / totalVotes) * 100) : 0;
+        
+        opt.querySelector('.audience-bar').style.width = `${percentage}%`;
+        opt.querySelector('.audience-percentage').textContent = `${percentage}%`;
+    });
+}
+        star.addEventListener('mouseover', function() {
+            const hoverRating = parseInt(this.getAttribute('data-rating'));
+            
+            stars.forEach((s, index) => {
+                if (index < hoverRating) {
+                    s.classList.add('hover');
+                } else {
+                    s.classList.remove('hover');
+                }
+            });
+        });
+        // Add to JavaScript
+const feedbackText = document.getElementById('feedbackText');
+const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
+const feedbackList = document.getElementById('feedbackList');
+
+submitFeedbackBtn.addEventListener('click', submitFeedback);
+
+function submitFeedback() {
+    const feedback = feedbackText.value.trim();
+    if (!feedback) return;
+    
+    if (!currentUser || !currentQuiz) {
+        alert('Please log in to submit feedback');
+        return;
+    }
+    
+    const feedbackRef = db.ref(`quizzes/${currentQuiz.id}/feedback`).push();
+    
+    feedbackRef.set({
+        userId: currentUser.uid,
+        userName: currentUser.displayName || currentUser.email.split('@')[0],
+        text: feedback,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    })
+    .then(() => {
+        feedbackText.value = '';
+        alert('Thank you for your feedback!');
+    })
+    .catch(error => {
+        console.error("Error submitting feedback:", error);
+        alert('Failed to submit feedback. Please try again.');
+    });
+}
+
+function loadFeedback(quizId) {
+    feedbackList.innerHTML = '<div class="loading">Loading feedback...</div>';
+    
+    db.ref(`quizzes/${quizId}/feedback`).orderByChild('timestamp').limitToLast(10).once('value')
+        .then(snapshot => {
+            feedbackList.innerHTML = '';
+            const feedbacks = snapshot.val() || {};
+            
+            if (Object.keys(feedbacks).length === 0) {
+                feedbackList.innerHTML = '<div class="no-feedback">No feedback yet. Be the first to comment!</div>';
+                return;
+            }
+            
+            Object.keys(feedbacks).forEach(feedbackId => {
+                const feedback = feedbacks[feedbackId];
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback-item fade-in';
+                feedbackDiv.innerHTML = `
+                    <div class="feedback-header">
+                        <div class="feedback-author">
+                            <div class="author-avatar">${feedback.userName.charAt(0)}</div>
+                            <span>${feedback.userName}</span>
+                        </div>
+                        <div class="feedback-date">${formatDate(feedback.timestamp)}</div>
+                    </div>
+                    <div class="feedback-text">${feedback.text}</div>
+                `;
+                feedbackList.appendChild(feedbackDiv);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading feedback:", error);
+            feedbackList.innerHTML = '<div class="error">Failed to load feedback. Please try again later.</div>';
+        });
+}
+
+function formatDate(timestamp) {
+    if (!timestamp) return '';
+    const date = new Date(timestamp);
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+}
+
+// Call this in showResults()
+loadFeedback(currentQuiz.id);
+        star.addEventListener('mouseout', function() {
+            stars.forEach(s => s.classList.remove('hover'));
+        });
+    });
+}
+const categories = [
+    { name: "All", icon: "fas fa-globe" },
+    { name: "Science", icon: "fas fa-flask" },
+    { name: "History", icon: "fas fa-landmark" },
+    { name: "Geography", icon: "fas fa-globe-americas" },
+    { name: "Movies", icon: "fas fa-film" },
+    { name: "Music", icon: "fas fa-music" },
+    { name: "Sports", icon: "fas fa-running" },
+    { name: "Technology", icon: "fas fa-laptop-code" }
+];
+
+// Update the category tabs initialization
+const categoryTabs = document.querySelector('.category-tabs');
+categoryTabs.innerHTML = '';
+
+categories.forEach(category => {
+    const tab = document.createElement('div');
+    tab.className = `category-tab ${category.name === 'All' ? 'active' : ''}`;
+    tab.dataset.category = category.name;
+    tab.innerHTML = `<i class="${category.icon}"></i> ${category.name}`;
+    categoryTabs.appendChild(tab);
+    
+    tab.addEventListener('click', function() {
+        document.querySelector('.category-tab.active').classList.remove('active');
+        this.classList.add('active');
+        filterQuizzesByCategory(this.dataset.category);
+    });
+});
+
+function filterQuizzesByCategory(category) {
+    if (category === 'All') {
+        loadQuizzes();
+        return;
+    }
+    
+    db.ref('quizzes').orderByChild('category').equalTo(category).once('value')
+        .then(snapshot => {
+            quizGrid.innerHTML = '';
+            const quizzes = snapshot.val() || {};
+            
+            Object.keys(quizzes).forEach(quizId => {
+                if (quizzes[quizId].isPublic) {
+                    createQuizCard(quizId, quizzes[quizId]);
+                }
+            });
+            
+            if (quizGrid.children.length === 0) {
+                quizGrid.innerHTML = `<div class="no-quizzes">No ${category} quizzes available yet.</div>`;
+            }
+        });
+}
+// Call this in showResults()
+setupRatingSystem();
             // Add event listener to live quiz button if present
             const liveBtn = quizCard.querySelector('.live-quiz-btn');
             if (liveBtn) {
@@ -2742,8 +4003,22 @@ shareBtn.addEventListener('click', generateResultImage);
             
             // Validate quiz title
             if (!quizTitle.value.trim()) {
-                alert('Please enter a quiz title');
+                showError('quizTitleError', 'Please enter a quiz title');
                 quizTitle.focus();
+                return;
+            }
+            
+            // Validate quiz category
+            if (!quizCategory.value) {
+                showError('quizCategoryError', 'Please select a category');
+                quizCategory.focus();
+                return;
+            }
+            
+            // Validate time limit
+            if (!timeLimit.value || timeLimit.value < 1 || timeLimit.value > 120) {
+                showError('timeLimitError', 'Please enter a valid time limit (1-120 minutes)');
+                timeLimit.focus();
                 return;
             }
             
@@ -2950,7 +4225,223 @@ shareBtn.addEventListener('click', generateResultImage);
             } else {
                 questionImage.classList.add('hidden');
             }
+        
+            class ParticipantView {
+    constructor() {
+        this.quiz = null;
+        this.liveCode = '';
+        this.currentQuestionIndex = 0;
+        this.strikes = 0;
+        this.hasShield = false;
+        this.leaderboard = [];
+        this.timerInterval = null;
+        this.timeLeft = 0;
+    }
+
+    joinLiveQuiz(code) {
+        this.liveCode = code;
+        
+        // Show participant view
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('participantView').classList.remove('hidden');
+        document.getElementById('participantGameCode').textContent = code;
+        
+        // Set up real-time listeners
+        this.setupListeners();
+    }
+
+    setupListeners() {
+        // Quiz info listener
+        db.ref(`liveQuizzes/${this.liveCode}`).on('value', snapshot => {
+            const liveQuiz = snapshot.val();
+            if (!liveQuiz) {
+                alert('Quiz not found!');
+                return;
+            }
             
+            // Load quiz data if not already loaded
+            if (!this.quiz && liveQuiz.quizId) {
+                db.ref(`quizzes/${liveQuiz.quizId}`).once('value').then(quizSnapshot => {
+                    this.quiz = quizSnapshot.val();
+                    document.getElementById('participantQuizTitle').textContent = this.quiz.title;
+                });
+            }
+            
+            // Update status
+            if (liveQuiz.status === 'waiting') {
+                document.getElementById('quizStatus').textContent = 'Waiting for host to start the quiz...';
+                document.getElementById('participantQuestionContainer').classList.add('hidden');
+                document.getElementById('participantLeaderboard').classList.add('hidden');
+            } else if (liveQuiz.status === 'started') {
+                document.getElementById('quizStatus').classList.add('hidden');
+                document.getElementById('participantQuestionContainer').classList.remove('hidden');
+                
+                // Load current question if changed
+                if (liveQuiz.currentQuestion !== this.currentQuestionIndex) {
+                    this.currentQuestionIndex = liveQuiz.currentQuestion;
+                    this.loadQuestion();
+                }
+            } else if (liveQuiz.status === 'ended') {
+                document.getElementById('quizStatus').textContent = 'Quiz has ended!';
+                document.getElementById('quizStatus').classList.remove('hidden');
+                document.getElementById('participantQuestionContainer').classList.add('hidden');
+                document.getElementById('participantLeaderboard').classList.remove('hidden');
+            }
+            
+            // Update game mode
+            if (liveQuiz.gameMode === 'strike') {
+                document.getElementById('strikeIndicator').classList.remove('hidden');
+            } else {
+                document.getElementById('strikeIndicator').classList.add('hidden');
+            }
+            
+            if (this.hasShield) {
+                document.getElementById('shieldIndicator').classList.remove('hidden');
+            } else {
+                document.getElementById('shieldIndicator').classList.add('hidden');
+            }
+        });
+        
+        // Leaderboard listener
+        db.ref(`liveQuizzes/${this.liveCode}/leaderboard`).on('value', snapshot => {
+            this.leaderboard = snapshot.val() || [];
+            this.updateLeaderboard();
+        });
+    }
+
+    loadQuestion() {
+        if (!this.quiz || this.currentQuestionIndex >= this.quiz.questions.length) return;
+        
+        const question = this.quiz.questions[this.currentQuestionIndex];
+        
+        // Update UI
+        document.getElementById('currentQNumber').textContent = this.currentQuestionIndex + 1;
+        document.getElementById('participantQuestionText').textContent = question.question;
+        
+        const optionsList = document.getElementById('participantOptionsList');
+        optionsList.innerHTML = '';
+        
+        question.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.className = 'option-item';
+            li.innerHTML = `
+                <label class="option-label">
+                    <input type="radio" name="quiz-option" class="option-input" value="${index}">
+                    ${option}
+                </label>
+            `;
+            
+            li.querySelector('input').addEventListener('change', (e) => {
+                this.submitAnswer(index);
+            });
+            
+            optionsList.appendChild(li);
+        });
+        
+        // Start timer
+        this.startTimer(30); // 30 seconds per question
+    }
+
+    startTimer(seconds) {
+        this.timeLeft = seconds;
+        document.getElementById('participantTimer').textContent = this.timeLeft;
+        
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        
+        this.timerInterval = setInterval(() => {
+            this.timeLeft--;
+            document.getElementById('participantTimer').textContent = this.timeLeft;
+            
+            if (this.timeLeft <= 0) {
+                clearInterval(this.timerInterval);
+                // Auto-submit if time runs out
+                this.submitAnswer(-1); // -1 indicates no answer
+            }
+        }, 1000);
+    }
+
+    submitAnswer(answerIndex) {
+        if (!this.quiz || !currentUser) return;
+        
+        // Stop timer
+        clearInterval(this.timerInterval);
+        
+        // Disable all options
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.disabled = true;
+        });
+        
+        // Highlight selected answer
+        if (answerIndex >= 0) {
+            const selectedOption = document.querySelector(`.option-input[value="${answerIndex}"]`).parentNode;
+            selectedOption.classList.add('selected');
+            
+            // Check correctness
+            const isCorrect = answerIndex === this.quiz.questions[this.currentQuestionIndex].answer;
+            
+            if (isCorrect) {
+                selectedOption.classList.add('correct');
+            } else {
+                selectedOption.classList.add('incorrect');
+                
+                // Handle strikes in strike mode
+                // (Would need to check current game mode)
+                this.strikes++;
+                document.getElementById('strikeCount').textContent = this.strikes;
+                
+                if (this.strikes >= 3) {
+                    // Eliminated from quiz
+                    alert('You have 3 strikes and are out of the quiz!');
+                }
+            }
+        }
+        
+        // Send answer to server
+        db.ref(`liveQuizzes/${this.liveCode}/answers/${currentUser.uid}`).update({
+            [this.currentQuestionIndex]: answerIndex,
+            time: Date.now()
+        });
+    }
+
+    updateLeaderboard() {
+        const leaderboardList = document.getElementById('participantLeaderboardList');
+        leaderboardList.innerHTML = '';
+        
+        this.leaderboard.slice(0, 10).forEach((entry, index) => {
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'leaderboard-entry';
+            entryDiv.innerHTML = `
+                <div class="leaderboard-position">${index + 1}</div>
+                <div class="leaderboard-name">${entry.name}</div>
+                <div class="leaderboard-score">${entry.score}</div>
+            `;
+            
+            // Highlight current user
+            if (entry.userId === currentUser?.uid) {
+                entryDiv.style.fontWeight = 'bold';
+                entryDiv.style.background = 'rgba(67, 97, 238, 0.1)';
+            }
+            
+            leaderboardList.appendChild(entryDiv);
+        });
+    }
+}
+
+// Initialize participant view
+const participantView = new ParticipantView();
+
+// Handle join link
+function checkJoinCode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const joinCode = urlParams.get('join');
+    
+    if (joinCode) {
+        participantView.joinLiveQuiz(joinCode);
+    }
+}
+
+// Call on page load
+window.addEventListener('load', checkJoinCode);
             question.options.forEach((option, index) => {
                 const li = document.createElement('li');
                 li.className = 'option-item fade-in';
@@ -3331,7 +4822,350 @@ shareBtn.addEventListener('click', generateResultImage);
                     document.querySelector('.next-btn').disabled = true;
                 }
             });
+            // Add AI quiz creation interface
+function showAICreator() {
+    const modal = document.createElement('div');
+    modal.className = 'ai-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h3>AI Quiz Generator</h3>
+            <div class="form-group">
+                <label>Topic</label>
+                <input type="text" id="aiTopic" placeholder="Enter quiz topic">
+            </div>
+            <div class="form-group">
+                <label>Difficulty</label>
+                <select id="aiDifficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Number of Questions</label>
+                <input type="number" id="aiQuestionCount" min="5" max="50" value="10">
+            </div>
+            <button class="primary-btn" id="generateQuizBtn">Generate Quiz</button>
+            <div class="ai-loading hidden">
+                <div class="spinner"></div>
+                <p>Generating your quiz...</p>
+            </div>
+            <div class="ai-results hidden"></div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Handle generation
+    document.getElementById('generateQuizBtn').addEventListener('click', function() {
+        const topic = document.getElementById('aiTopic').value;
+        const difficulty = document.getElementById('aiDifficulty').value;
+        const count = document.getElementById('aiQuestionCount').value;
+        
+        if (!topic) {
+            alert('Please enter a topic');
+            return;
+        }
+        
+        // Show loading state
+        document.querySelector('.ai-loading').classList.remove('hidden');
+        
+        // In a real app, you would call an AI API here
+        // This is a mock implementation
+        setTimeout(() => {
+            generateMockAIQuiz(topic, difficulty, count);
+        }, 2000);
+    });
+}
+
+function generateMockAIQuiz(topic, difficulty, count) {
+    // This would be replaced with actual AI API calls in production
+    const questions = [];
+    const difficulties = {
+        easy: { options: 3, complexity: 1 },
+        medium: { options: 4, complexity: 2 },
+        hard: { options: 5, complexity: 3 }
+    };
+    
+    for (let i = 0; i < count; i++) {
+        const options = [];
+        const correctIndex = Math.floor(Math.random() * difficulties[difficulty].options);
+        
+        for (let j = 0; j < difficulties[difficulty].options; j++) {
+            options.push(`Option ${j+1} for question ${i+1}`);
+        }
+        
+        questions.push({
+            question: `AI-generated question about ${topic} (${i+1}/${count})`,
+            options: options,
+            answer: correctIndex,
+            explanation: `This is the explanation for question ${i+1}`
+        });
+    }
+    
+    // Display generated quiz
+    const resultsDiv = document.querySelector('.ai-results');
+    resultsDiv.innerHTML = `
+        <h4>Generated Quiz: ${topic}</h4>
+        <div class="ai-questions"></div>
+        <button class="primary-btn" id="useQuizBtn">Use This Quiz</button>
+    `;
+    
+    const questionsDiv = resultsDiv.querySelector('.ai-questions');
+    questions.forEach((q, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'ai-question';
+        qDiv.innerHTML = `
+            <p><strong>Q${index+1}:</strong> ${q.question}</p>
+            <ul>
+                ${q.options.map((opt, i) => `
+                    <li class="${i === q.answer ? 'correct-answer' : ''}">${opt}</li>
+                `).join('')}
+            </ul>
+            <p class="explanation"><em>${q.explanation}</em></p>
+        `;
+        questionsDiv.appendChild(qDiv);
+    });
+    
+    // Hide loading, show results
+    document.querySelector('.ai-loading').classList.add('hidden');
+    resultsDiv.classList.remove('hidden');
+    
+    // Handle using the quiz
+    document.getElementById('useQuizBtn').addEventListener('click', function() {
+        // Transfer to quiz creator
+        showQuizCreator();
+        questionsContainer.innerHTML = '';
+        
+        questions.forEach(q => {
+            addQuestion();
+            const lastQuestion = questionsContainer.lastChild;
+            lastQuestion.querySelector('.question-input').value = q.question;
             
+            const optionsContainer = lastQuestion.querySelector('.options-container');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                addOption(optionsContainer);
+                const lastOption = optionsContainer.lastChild;
+                lastOption.querySelector('.option-text').value = opt;
+                if (i === q.answer) {
+                    lastOption.querySelector('.option-input').checked = true;
+                }
+            });
+        });
+        
+        modal.remove();
+    });
+}
+// Video quiz player
+function createVideoQuizPlayer(videoUrl, questions) {
+    const player = document.createElement('div');
+    player.className = 'video-quiz-player';
+    player.innerHTML = `
+        <div class="video-container">
+            <video id="quizVideo" controls>
+                <source src="${videoUrl}" type="video/mp4">
+            </video>
+        </div>
+        <div class="quiz-questions"></div>
+    `;
+    
+    const video = player.querySelector('#quizVideo');
+    const questionsDiv = player.querySelector('.quiz-questions');
+    
+    // Set up question triggers
+    questions.forEach(q => {
+        video.addEventListener('timeupdate', function() {
+            if (Math.abs(video.currentTime - q.timestamp) < 0.5 && !q.triggered) {
+                q.triggered = true;
+                showVideoQuestion(q);
+            }
+        });
+    });
+    
+    function showVideoQuestion(question) {
+        video.pause();
+        
+        const qDiv = document.createElement('div');
+        qDiv.className = 'video-question';
+        qDiv.innerHTML = `
+            <h4>Question at ${formatTime(question.timestamp)}</h4>
+            <p>${question.text}</p>
+            <div class="options"></div>
+        `;
+        
+        question.options.forEach((opt, i) => {
+            const optBtn = document.createElement('button');
+            optBtn.className = 'video-option';
+            optBtn.textContent = opt.text;
+            optBtn.addEventListener('click', function() {
+                handleVideoAnswer(question, i);
+                qDiv.remove();
+                video.play();
+            });
+            qDiv.querySelector('.options').appendChild(optBtn);
+        });
+        
+        questionsDiv.appendChild(qDiv);
+    }
+    
+    return player;
+}
+// Tournament management
+function createTournament() {
+    const modal = document.createElement('div');
+    modal.className = 'tournament-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h3>Create Tournament</h3>
+            <div class="form-group">
+                <label>Tournament Name</label>
+                <input type="text" id="tournamentName">
+            </div>
+            <div class="form-group">
+                <label>Select Quizzes</label>
+                <div class="quiz-selection"></div>
+            </div>
+            <div class="form-group">
+                <label>Tournament Type</label>
+                <select id="tournamentType">
+                    <option value="knockout">Knockout</option>
+                    <option value="roundrobin">Round Robin</option>
+                    <option value="survival">Survival</option>
+                </select>
+            </div>
+            <button class="primary-btn" id="createTournamentBtn">Create</button>
+        </div>
+    `;
+    
+    // Load available quizzes
+    db.ref('quizzes').orderByChild('creatorId').equalTo(currentUser.uid).once('value')
+        .then(snapshot => {
+            const quizzes = snapshot.val() || {};
+            const selectionDiv = modal.querySelector('.quiz-selection');
+            
+            Object.keys(quizzes).forEach(quizId => {
+                const quiz = quizzes[quizId];
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `quiz-${quizId}`;
+                checkbox.value = quizId;
+                
+                const label = document.createElement('label');
+                label.htmlFor = `quiz-${quizId}`;
+                label.textContent = quiz.title;
+                
+                selectionDiv.appendChild(checkbox);
+                selectionDiv.appendChild(label);
+                selectionDiv.appendChild(document.createElement('br'));
+            });
+        });
+    
+    // Handle creation
+    modal.querySelector('#createTournamentBtn').addEventListener('click', function() {
+        const name = modal.querySelector('#tournamentName').value;
+        const type = modal.querySelector('#tournamentType').value;
+        const selectedQuizzes = Array.from(modal.querySelectorAll('input[type="checkbox"]:checked'))
+            .map(cb => cb.value);
+        
+        if (!name || selectedQuizzes.length === 0) {
+            alert('Please fill all fields');
+            return;
+        }
+        
+        const tournamentRef = db.ref('tournaments').push();
+        tournamentRef.set({
+            name: name,
+            type: type,
+            quizzes: selectedQuizzes,
+            creator: currentUser.uid,
+            status: 'upcoming',
+            participants: {},
+            startTime: firebase.database.ServerValue.TIMESTAMP,
+            endTime: null
+        }).then(() => {
+            modal.remove();
+            showTournament(tournamentRef.key);
+        });
+    });
+    
+    document.body.appendChild(modal);
+}
+// Internationalization system
+const translations = {
+    en: {
+        quizTitle: "Quiz Title",
+        startQuiz: "Start Quiz",
+        // ... other strings
+    },
+    es: {
+        quizTitle: "Título del cuestionario",
+        startQuiz: "Comenzar cuestionario",
+        // ... other strings
+    },
+    fr: {
+        quizTitle: "Titre du quiz",
+        startQuiz: "Commencer le quiz",
+        // ... other strings
+    }
+};
+
+let currentLanguage = 'en';
+
+function setLanguage(lang) {
+    if (!translations[lang]) return;
+    currentLanguage = lang;
+    
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        el.textContent = translations[lang][key] || translations.en[key];
+    });
+    
+    // Save preference
+    localStorage.setItem('quizLanguage', lang);
+}
+
+// Language selector
+function initLanguageSelector() {
+    const selector = document.createElement('select');
+    selector.id = 'languageSelector';
+    
+    Object.keys(translations).forEach(lang => {
+        const option = document.createElement('option');
+        option.value = lang;
+        option.textContent = lang.toUpperCase();
+        selector.appendChild(option);
+    });
+    
+    selector.value = currentLanguage;
+    selector.addEventListener('change', () => setLanguage(selector.value));
+    
+    document.querySelector('header').appendChild(selector);
+}
+
+// Auto-translate quiz questions
+function translateQuiz(quiz, targetLang) {
+    if (targetLang === 'en') return Promise.resolve(quiz);
+    
+    // This would call a translation API in production
+    return new Promise(resolve => {
+        const translated = JSON.parse(JSON.stringify(quiz));
+        
+        // Translate title and description
+        translated.title = `[${targetLang}] ${quiz.title}`;
+        translated.description = `[${targetLang}] ${quiz.description}`;
+        
+        // Translate questions
+        translated.questions.forEach(q => {
+            q.question = `[${targetLang}] ${q.question}`;
+            q.options = q.options.map(opt => `[${targetLang}] ${opt}`);
+        });
+        
+        resolve(translated);
+    });
+}
             document.querySelector('.end-btn').addEventListener('click', () => {
                 // End the live quiz
                 if (confirm('Are you sure you want to end this live quiz?')) {
@@ -3341,7 +5175,378 @@ shareBtn.addEventListener('click', generateResultImage);
                 }
             });
         }
+        // Live Quiz Manager
+class LiveQuizManager {
+    constructor() {
+        this.quiz = null;
+        this.liveCode = '';
+        this.currentQuestionIndex = 0;
+        this.participants = {};
+        this.answers = {};
+        this.gameMode = 'normal';
+        this.activePowerUps = [];
+        this.questionStartTime = 0;
+        this.strikeParticipants = {};
+        this.shieldParticipants = {};
+    }
+
+    startLiveQuiz(quizId) {
+        db.ref(`quizzes/${quizId}`).once('value').then(snapshot => {
+            this.quiz = snapshot.val();
+            this.quiz.id = quizId;
+            
+            // Generate a random 5-character code
+            this.liveCode = Math.random().toString(36).substring(2, 7).toUpperCase();
+            
+            // Initialize live quiz data
+            db.ref(`liveQuizzes/${this.liveCode}`).set({
+                quizId: quizId,
+                status: 'waiting',
+                currentQuestion: null,
+                participants: {},
+                answers: {},
+                gameMode: 'normal',
+                powerUps: [],
+                startTime: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+            // Update UI
+            document.getElementById('liveQuizTitle').textContent = this.quiz.title;
+            document.getElementById('gameCodeDisplay').textContent = this.liveCode;
+            
+            // Show dashboard
+            showLiveDashboard();
+            
+            // Set up real-time listeners
+            this.setupLiveListeners();
+        });
+    }
+
+    setupLiveListeners() {
+        // Participants listener
+        db.ref(`liveQuizzes/${this.liveCode}/participants`).on('value', snapshot => {
+            this.participants = snapshot.val() || {};
+            this.updateParticipantsList();
+        });
         
+        // Answers listener
+        db.ref(`liveQuizzes/${this.liveCode}/answers`).on('value', snapshot => {
+            this.answers = snapshot.val() || {};
+            this.updateQuestionStats();
+        });
+        
+        // Game mode listener
+        db.ref(`liveQuizzes/${this.liveCode}/gameMode`).on('value', snapshot => {
+            this.gameMode = snapshot.val() || 'normal';
+            this.updateGameModeUI();
+        });
+    }
+
+    updateParticipantsList() {
+        const participantList = document.getElementById('participantList');
+        participantList.innerHTML = '';
+        
+        Object.keys(this.participants).forEach(userId => {
+            const participant = this.participants[userId];
+            const participantItem = document.createElement('div');
+            participantItem.className = 'participant-item';
+            
+            // Add strike/shield indicators based on mode
+            let statusIndicator = '';
+            if (this.gameMode === 'strike' && this.strikeParticipants[userId]) {
+                statusIndicator = `<span class="strike-indicator">Strikes: ${this.strikeParticipants[userId]}</span>`;
+            } else if (this.gameMode === 'shield' && this.shieldParticipants[userId]) {
+                statusIndicator = `<span class="shield-indicator">Shield Active</span>`;
+            }
+            
+            participantItem.innerHTML = `
+                <div class="participant-info">
+                    <div class="participant-avatar">${participant.name.charAt(0)}</div>
+                    <span>${participant.name}</span>
+                </div>
+                <div class="participant-status ${participant.active ? 'online' : 'offline'}"></div>
+                ${statusIndicator}
+            `;
+            
+            participantList.appendChild(participantItem);
+        });
+        
+        document.getElementById('participantCount').textContent = Object.keys(this.participants).length;
+    }
+
+    startQuiz() {
+        this.currentQuestionIndex = 0;
+        db.ref(`liveQuizzes/${this.liveCode}`).update({
+            status: 'started',
+            currentQuestion: 0,
+            startTime: firebase.database.ServerValue.TIMESTAMP
+        });
+        
+        this.loadQuestion(this.currentQuestionIndex);
+    }
+
+    loadQuestion(index) {
+        if (index >= this.quiz.questions.length) {
+            this.endQuiz();
+            return;
+        }
+        
+        const question = this.quiz.questions[index];
+        this.questionStartTime = Date.now();
+        
+        // Update database
+        db.ref(`liveQuizzes/${this.liveCode}`).update({
+            currentQuestion: index,
+            answers: {} // Clear previous answers
+        });
+        
+        // Update UI
+        document.getElementById('currentQuestionDisplay').innerHTML = `
+            <h4>Question ${index + 1} of ${this.quiz.questions.length}</h4>
+            <p>${question.question}</p>
+            ${question.image ? `<img src="${question.image}" alt="Question Image" style="max-width: 100%; height: auto;">` : ''}
+        `;
+        
+        // Reset stats
+        document.getElementById('answeredCount').textContent = '0';
+        document.getElementById('correctCount').textContent = '0%';
+        document.getElementById('avgTime').textContent = '0s';
+        
+        // Enable/disable buttons
+        document.getElementById('nextQuestionBtn').disabled = true;
+    }
+
+    nextQuestion() {
+        this.currentQuestionIndex++;
+        this.loadQuestion(this.currentQuestionIndex);
+    }
+
+    endQuiz() {
+        db.ref(`liveQuizzes/${this.liveCode}`).update({
+            status: 'ended',
+            endTime: firebase.database.ServerValue.TIMESTAMP
+        });
+        
+        // Calculate final scores
+        this.calculateFinalScores();
+        
+        // Show results
+        this.showFinalResults();
+    }
+
+    calculateFinalScores() {
+        // Calculate scores based on answers and game mode
+        const scores = {};
+        
+        Object.keys(this.participants).forEach(userId => {
+            scores[userId] = {
+                name: this.participants[userId].name,
+                score: 0,
+                correct: 0
+            };
+        });
+        
+        // Process each question's answers
+        for (let i = 0; i < this.quiz.questions.length; i++) {
+            const correctAnswer = this.quiz.questions[i].answer;
+            
+            Object.keys(this.answers).forEach(userId => {
+                if (this.answers[userId][i] !== undefined) {
+                    const isCorrect = this.answers[userId][i] === correctAnswer;
+                    
+                    // Apply game mode rules
+                    if (this.gameMode === 'strike') {
+                        if (!isCorrect) {
+                            this.strikeParticipants[userId] = (this.strikeParticipants[userId] || 0) + 1;
+                            if (this.strikeParticipants[userId] >= 3) {
+                                // Eliminate participant after 3 strikes
+                                return;
+                            }
+                        }
+                    } else if (this.gameMode === 'shield' && this.shieldParticipants[userId]) {
+                        // Shield protects from wrong answers
+                        if (!isCorrect) {
+                            this.shieldParticipants[userId] = false; // Shield used up
+                            return;
+                        }
+                    }
+                    
+                    if (isCorrect) {
+                        scores[userId].score += 10; // Base points
+                        scores[userId].correct++;
+                        
+                        // Double points power-up
+                        if (this.activePowerUps.includes('doublePoints')) {
+                            scores[userId].score += 10; // Bonus points
+                        }
+                    }
+                }
+            });
+        }
+        
+        return scores;
+    }
+
+    showFinalResults() {
+        const scores = this.calculateFinalScores();
+        const sortedScores = Object.entries(scores)
+            .map(([userId, data]) => ({ userId, ...data }))
+            .sort((a, b) => b.score - a.score);
+        
+        // Update leaderboard
+        const leaderboard = document.getElementById('leaderboard');
+        leaderboard.innerHTML = '';
+        
+        sortedScores.forEach((participant, index) => {
+            const item = document.createElement('div');
+            item.className = 'leaderboard-item';
+            item.innerHTML = `
+                <div class="leaderboard-position">${index + 1}</div>
+                <div class="leaderboard-user">
+                    <div class="participant-avatar">${participant.name.charAt(0)}</div>
+                    <span>${participant.name}</span>
+                </div>
+                <div class="leaderboard-score">${participant.score}</div>
+            `;
+            leaderboard.appendChild(item);
+        });
+        
+        // Show final results message
+        document.getElementById('currentQuestionDisplay').innerHTML = `
+            <h3>Quiz Completed!</h3>
+            <p>Congratulations to ${sortedScores[0]?.name || 'the participants'} for winning!</p>
+            <div class="final-stats">
+                <p>Total Questions: ${this.quiz.questions.length}</p>
+                <p>Highest Score: ${sortedScores[0]?.score || 0}</p>
+            </div>
+        `;
+    }
+
+    activatePowerUp(powerUp) {
+        this.activePowerUps.push(powerUp);
+        db.ref(`liveQuizzes/${this.liveCode}/powerUps`).set(this.activePowerUps);
+        
+        // Apply power-up effects
+        switch(powerUp) {
+            case 'doublePoints':
+                // Already handled in scoring
+                break;
+            case 'timeBoost':
+                // Extend time for current question
+                break;
+            case 'revealAnswer':
+                // Show correct answer to participants
+                break;
+            case 'randomShield':
+                // Randomly select a participant to give a shield to
+                const participants = Object.keys(this.participants);
+                if (participants.length > 0) {
+                    const luckyUser = participants[Math.floor(Math.random() * participants.length)];
+                    this.shieldParticipants[luckyUser] = true;
+                }
+                break;
+        }
+    }
+
+    setGameMode(mode) {
+        this.gameMode = mode;
+        db.ref(`liveQuizzes/${this.liveCode}/gameMode`).set(mode);
+        
+        // Reset mode-specific data
+        if (mode === 'strike') {
+            this.strikeParticipants = {};
+        } else if (mode === 'shield') {
+            this.shieldParticipants = {};
+        }
+    }
+
+    updateQuestionStats() {
+        const currentQuestion = this.quiz.questions[this.currentQuestionIndex];
+        const correctAnswer = currentQuestion.answer;
+        
+        let answered = 0;
+        let correct = 0;
+        let totalTime = 0;
+        
+        Object.keys(this.answers).forEach(userId => {
+            if (this.answers[userId][this.currentQuestionIndex] !== undefined) {
+                answered++;
+                
+                if (this.answers[userId][this.currentQuestionIndex] === correctAnswer) {
+                    correct++;
+                }
+                
+                // Calculate average answer time
+                if (this.answers[userId].time) {
+                    totalTime += this.answers[userId].time - this.questionStartTime;
+                }
+            }
+        });
+        
+        // Update UI
+        document.getElementById('answeredCount').textContent = answered;
+        document.getElementById('correctCount').textContent = answered > 0 ? 
+            Math.round((correct / answered) * 100) + '%' : '0%';
+        document.getElementById('avgTime').textContent = answered > 0 ? 
+            Math.round(totalTime / answered / 1000) + 's' : '0s';
+        
+        // Enable next question button if enough participants answered
+        if (answered >= Object.keys(this.participants).length / 2) {
+            document.getElementById('nextQuestionBtn').disabled = false;
+        }
+    }
+
+    updateGameModeUI() {
+        // Update mode selector
+        document.querySelectorAll('.mode-option').forEach(option => {
+            option.classList.toggle('active', option.dataset.mode === this.gameMode);
+        });
+        
+        // Update UI based on mode
+        if (this.gameMode === 'strike') {
+            document.querySelector('.game-modes h3').innerHTML = '<i class="fas fa-bolt"></i> Strike Mode';
+        } else if (this.gameMode === 'shield') {
+            document.querySelector('.game-modes h3').innerHTML = '<i class="fas fa-shield-alt"></i> Shield Mode';
+        } else {
+            document.querySelector('.game-modes h3').innerHTML = '<i class="fas fa-question"></i> Normal Mode';
+        }
+    }
+}
+
+// Initialize live quiz manager
+const liveQuizManager = new LiveQuizManager();
+
+// Event listeners
+document.getElementById('startGameBtn').addEventListener('click', () => liveQuizManager.startQuiz());
+document.getElementById('nextQuestionBtn').addEventListener('click', () => liveQuizManager.nextQuestion());
+document.getElementById('endGameBtn').addEventListener('click', () => liveQuizManager.endQuiz());
+document.getElementById('copyLinkBtn').addEventListener('click', () => {
+    const joinLink = `${window.location.origin}?join=${liveQuizManager.liveCode}`;
+    navigator.clipboard.writeText(joinLink).then(() => {
+        alert('Join link copied to clipboard!');
+    });
+});
+
+// Game mode selection
+document.querySelectorAll('.mode-option').forEach(option => {
+    option.addEventListener('click', () => {
+        liveQuizManager.setGameMode(option.dataset.mode);
+    });
+});
+
+// Power-up activation
+document.querySelectorAll('.powerup-card').forEach(card => {
+    card.addEventListener('click', () => {
+        liveQuizManager.activatePowerUp(card.dataset.power);
+        card.classList.add('active');
+        setTimeout(() => card.classList.remove('active'), 2000);
+    });
+});
+
+// Start a live quiz (example usage)
+function startLiveQuiz(quizId) {
+    liveQuizManager.startLiveQuiz(quizId);
+}
         // Initialize the app when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
